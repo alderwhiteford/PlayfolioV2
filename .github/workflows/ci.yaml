@@ -1,0 +1,42 @@
+name: CI
+run-name: CI - Lint / Build
+on: 
+  pull_request:
+    branches:
+      - main
+  
+# Ensures that only one job group runs at a time to avoid resource waste
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+      - name: Install dependencies
+        run: npm install
+      - name: Run linter
+        run: npm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
