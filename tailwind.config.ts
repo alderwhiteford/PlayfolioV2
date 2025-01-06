@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import Typography from '@tailwindcss/typography'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default {
   content: [
@@ -9,10 +11,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        backgroundDark: "#080808",
+        backgroundLight: "#FFFFFF",
+        primary: "#ECC061",
+        secondary: "#98D6FF",
+      },
+      fontFamily: {
+        jost: ["Jost", ...fontFamily.sans],
+        inter: ["Inter", ...fontFamily.sans],
+        ibmPlexMono: ["IBM Plex Mono", ...fontFamily.mono]
       },
     },
   },
-  plugins: [],
+  plugins: [ Typography ],
 } satisfies Config;
